@@ -57,8 +57,14 @@ io.on("connect", socket => {
     })
 
     socket.on("join", (res: {name: string}) => {
+	if(players.find(p => p.name == res.name) != undefined) {
+	    socket.emit("noJoin")
+	    return
+	}
+
 	let player = new Player(res.name, socket.id)
 	if(players.length == 0) player.host = true
+
 	players.push(player)
 
 	console.log(`${res.name} Joined!`)

@@ -41,6 +41,11 @@ const Game = ({socket}: {socket: Socket}) => {
 	setGameOver(res.gameOver)
     })
 
+    socket.on("noJoin", () => {
+	alert("Someone in this game already has that username.")
+	window.close()
+    })
+
     return (
     	<div className={styles.container}>
 	    {gameStarted ? (
