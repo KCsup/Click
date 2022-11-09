@@ -26,11 +26,13 @@ export class Player {
 
 let players: Player[] = []
 let gameStarted = false
+let gameOver = false
 
 const update = (): void => {
     io.emit("update", {
 	players: players,
-	gameStarted: gameStarted
+	gameStarted: gameStarted,
+	gameOver: gameOver
     })
 }
 
@@ -61,6 +63,23 @@ io.on("connect", socket => {
 
 	console.log(`${res.name} Joined!`)
 
+	update()
+    })
+
+    socket.on("startGame", () => {
+	gameStarted = true
+
+	update()
+    })
+
+    socket.on("click", () => {
+	players[players.indexOf(getPlayer(socket.id)!)].clicks += 1
+
+	update()
+    })
+
+    socket.on("gameOver", () => {
+	gameOver = true
 	update()
     })
 })
