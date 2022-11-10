@@ -26,7 +26,7 @@ const Game = ({socket}: {socket: Socket}) => {
 
     const getLeaderboard = () => {
 	let leaderboard = [...players]
-	leaderboard.splice(leaderboard.indexOf(leaderboard.find(p => p.host)!), 1)
+	leaderboard.splice(leaderboard.indexOf(leaderboard.find(p => p.host)!)!, 1)
 	leaderboard.sort((p1, p2) => { return p2.clicks - p1.clicks })
 	return leaderboard
     }
@@ -98,7 +98,7 @@ const Game = ({socket}: {socket: Socket}) => {
 
 		    {getSelf()?.host && players.length > 1 ? (
 			<>
-			    <button onClick={() => {
+			    <button className={styles.button} onClick={() => {
 				socket.emit("startGame")
 
 				setCountTimer(() => {
