@@ -22,7 +22,7 @@ export default function Home() {
 		while(typeof name != 'string' || name.length < 1)
 		    name = window.prompt("Name: ")
 
-		const s = io("http://10.81.104.154:6942")
+		const s = io("http://localhost:6942")
 
 		alert(name)
 

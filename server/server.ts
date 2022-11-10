@@ -79,7 +79,7 @@ io.on("connect", socket => {
     })
 
     socket.on("click", () => {
-	players[players.indexOf(getPlayer(socket.id)!)].clicks += 1
+	players[players.indexOf(getPlayer(socket.id)!)]!.clicks += 1
 
 	update()
     })
